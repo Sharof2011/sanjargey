@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Digital Soat</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.24/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-primary to-secondary flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full">
+        <!-- Main Clock Container -->
+        <div class="card bg-base-100/10 backdrop-blur-lg border border-base-content/20 shadow-2xl">
+            <div class="card-body">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <h1 class="text-5xl font-bold text-primary mb-2">Premium Digital Soat</h1>
+                    <p class="text-base-content/80 text-lg">DaisyUI bilan zamonaviy dizayn</p>
+                </div>
+                
+                <!-- Main Clock Display -->
+                <div class="text-center mb-8">
+                    <!-- Time Display -->
+                    <div class="card bg-neutral/50 backdrop-blur-sm shadow-xl mb-6">
+                        <div class="card-body">
+                            <div class="text-6xl md:text-8xl font-mono font-bold text-primary-content" id="time">
+                                00:00:00
+                            </div>
+                            <div class="text-2xl text-base-content/80 mt-2" id="period">
+                                AM
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Date Display -->
+                    <div class="alert alert-info mb-6">
+                        <div class="text-2xl font-semibold" id="date">
+                            Dushanba, 1 Yanvar 2024
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="stat bg-base-200/50 backdrop-blur-sm rounded-xl">
+                            <div class="stat-title">Hafta kuni</div>
+                            <div class="stat-value text-2xl text-primary" id="weekday">Dushanba</div>
+                        </div>
+                        <div class="stat bg-base-200/50 backdrop-blur-sm rounded-xl">
+                            <div class="stat-title">Yil</div>
+                            <div class="stat-value text-2xl text-secondary" id="year">2024</div>
+                        </div>
+                        <div class="stat bg-base-200/50 backdrop-blur-sm rounded-xl">
+                            <div class="stat-title">Yilning kuni</div>
+                            <div class="stat-value text-2xl text-accent" id="dayOfYear">1</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Control Panel -->
+                <div class="flex flex-wrap justify-center gap-4 mb-6">
+                    <!-- Format Toggle -->
+                    <button id="formatToggle" class="btn btn-primary btn-lg">
+                        <span class="text-lg">🕐</span>
+                        24 Soatlik Format
+                    </button>
+                    
+                    <!-- Alarm Button -->
+                    <button id="alarmBtn" class="btn btn-success btn-lg">
+                        <span class="text-lg">🔔</span>
+                        Signal
+                    </button>
+                    
+                    <!-- Stopwatch Button -->
+                    <button id="stopwatchBtn" class="btn btn-warning btn-lg">
+                        <span class="text-lg">⏱️</span>
+                        Sekundomer
+                    </button>
+                </div>
+                
+                <!-- Theme Selector -->
+                <div class="text-center mb-4">
+                    <p class="text-base-content/80 mb-4 text-lg">Tema tanlang:</p>
+                    <div class="flex justify-center gap-3 flex-wrap">
+                        <button class="btn btn-circle btn-primary" data-theme="dark">🌙</button>
+                        <button class="btn btn-circle btn-secondary" data-theme="light">☀️</button>
+                        <button class="btn btn-circle btn-accent" data-theme="cyberpunk">🤖</button>
+                        <button class="btn btn-circle btn-info" data-theme="aqua">🌊</button>
+                        <button class="btn btn-circle btn-success" data-theme="forest">🌲</button>
+                        <button class="btn btn-circle btn-warning" data-theme="sunset">🌅</button>
+                        <button class="btn btn-circle btn-error" data-theme="valentine">💝</button>
+                        <button class="btn btn-circle btn-neutral" data-theme="business">💼</button>
+                    </div>
+                </div>
+                
+                <!-- Stopwatch Panel (Hidden by default) -->
+                <div id="stopwatchPanel" class="hidden">
+                    <div class="divider">SEKUNDOMER</div>
+                    <div class="card bg-base-200/50 backdrop-blur-sm">
+                        <div class="card-body">
+                            <h3 class="card-title text-3xl text-center mb-4 text-primary">Sekundomer</h3>
+                            <div class="text-5xl font-mono font-bold text-center mb-6 text-accent" id="stopwatchDisplay">
+                                00:00:00.00
+                            </div>
+                            <div class="card-actions justify-center gap-4">
+                                <button id="startStopwatch" class="btn btn-success btn-lg">
+                                    <span class="text-lg">▶️</span>
+                                    Boshlash
+                                </button>
+                                <button id="pauseStopwatch" class="btn btn-warning btn-lg">
+                                    <span class="text-lg">⏸️</span>
+                                    Pauza
+                                </button>
+                                <button id="resetStopwatch" class="btn btn-error btn-lg">
+                                    <span class="text-lg">⏹️</span>
+                                    Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Ring for Current Time -->
+                <div class="flex justify-center mt-6">
+                    <div class="radial-progress text-primary" id="timeProgress" style="--value:0; --size:12rem; --thickness: 8px;">
+                        <div class="text-center">
+                            <div class="text-sm opacity-70">Bugun</div>
+                            <div class="text-lg font-bold" id="progressPercent">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Stats -->
+        <div class="stats stats-vertical lg:stats-horizontal shadow-xl mt-6 bg-base-100/20 backdrop-blur-lg">
+            <div class="stat">
+                <div class="stat-figure text-primary">
+                    <span class="text-3xl">⏰</span>
+                </div>
+                <div class="stat-title">Hozirgi vaqt</div>
+                <div class="stat-value text-primary" id="currentHour">00</div>
+                <div class="stat-desc">Soat</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-figure text-secondary">
+                    <span class="text-3xl">📅</span>
+                </div>
+                <div class="stat-title">Bugun</div>
+                <div class="stat-value text-secondary" id="currentDay">1</div>
+                <div class="stat-desc">Kun</div>
+            </div>
+            
+            <div class="stat">
+                <div class="stat-figure text-accent">
+                    <span class="text-3xl">🗓️</span>
+                </div>
+                <div class="stat-title">Hafta</div>
+                <div class="stat-value text-accent" id="weekNumber">1</div>
+                <div class="stat-desc">Hafta raqami</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js">
+      
+    </script>
+</body>
+</html>
